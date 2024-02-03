@@ -30,7 +30,11 @@
                                     <td>{{ $da->name }}</td>
                                     <td>{{ number_format($da->price) }}</td>
                                     <td>{{ $da->description }}</td>
-                                    <td>{{ $da->image }}</td>
+                                    <td>
+                                        <img id="myImg{{ $da->id }}"
+                                            src="{{ URL::asset('/assets/img/pizza/' . $da->image) }}" {{--  onclick="showImage(this,{{ $da->id }})" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal" height="90px" width="80px" alt="..." --}}>
+                                    </td>
                                 </tr>
                             @endforeach
 
