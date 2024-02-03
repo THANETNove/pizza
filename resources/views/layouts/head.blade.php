@@ -23,7 +23,7 @@
     rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="{{ URL::asset('/assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('/assets/css/sb-admin-2.css') }}" rel="stylesheet">
 
 <!-- Custom styles for this page -->
 <link href="{{ URL::asset('/assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">

@@ -31,9 +31,10 @@
                                     <td>{{ number_format($da->price) }}</td>
                                     <td>{{ $da->description }}</td>
                                     <td>
-                                        <img id="myImg{{ $da->id }}"
-                                            src="{{ URL::asset('/assets/img/pizza/' . $da->image) }}" {{--  onclick="showImage(this,{{ $da->id }})" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal" height="90px" width="80px" alt="..." --}}>
+                                        <img id="myImg{{ $da->id }}" class="cursor"
+                                            src="{{ URL::asset('/assets/img/pizza/' . $da->image) }}"
+                                            onclick="showImage(this,{{ $da->id }})" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal" height="90px" width="80px" alt="...">
                                     </td>
                                 </tr>
                             @endforeach
@@ -46,8 +47,20 @@
         </div>
 
     </div>
-    <!-- /.container-fluid -->
-
-
-    <!-- End of Main Content -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <img id="img1" width="100%">
+            </div>
+        </div>
+    </div>
+    <script>
+        function showImage(element, i) {
+            var modal = document.getElementById('myModal');
+            var img = document.getElementById('myImg' + i).src;
+            console.log("img", img);
+            document.getElementById('img1').src = img;
+        }
+    </script>
 @endsection
