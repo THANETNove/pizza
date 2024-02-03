@@ -47,16 +47,15 @@ class PizzaController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $dateNow = now()->format('YmdHis');  // ดึงวันที่และเวลาปัจจุบันในรูปแบบ YmdHis (YearMonthDayHourMinuteSecond)
-            $newFileName = $dateNow . $image->getClientOriginalName();
-
+            $dateNow = now()->format('YmdHis');
+            $newFileName = $dateNow . '.' . $image->getClientOriginalExtension();
             $data = $image->move(public_path() . '/assets/img/pizza', $newFileName);
-            $dateImg = $dateNow . $image->getClientOriginalName();
+            $dateImg = $newFileName;
         }
         $member = new Pizza;
         $member->name = $request['name'];
         $member->price = $request['price'];
-        $member->image = $request['image'];
+        $member->image = $dateImg;
         $member->description = $request['description'];
         $member->save();
         return redirect('pizza-index')->with('message', "บันทึกสำเร็จ" );
