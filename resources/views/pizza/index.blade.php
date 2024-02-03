@@ -5,7 +5,8 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                <h6 class="m-0 font-weight-bold text-primary mb-2">PIZZA</h6>
+                <a href="{{ url('pizza-create') }}">เพิ่ม pizza</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -13,29 +14,27 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">ชื่อ</th>
+                                <th scope="col">ราคา</th>
+                                <th scope="col">รายละเอียด</th>
+                                <th scope="col">รูปภาพ</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach ($data as $da)
+                                <tr>
+                                    <th scope="row">{{ $i++ }}</th>
+                                    <td>{{ $da->name }}</td>
+                                    <td>{{ number_format($da->price) }}</td>
+                                    <td>{{ $da->description }}</td>
+                                    <td>{{ $da->image }}</td>
+                                </tr>
+                            @endforeach
+
+
                         </tbody>
                     </table>
                 </div>
