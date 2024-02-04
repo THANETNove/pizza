@@ -224,27 +224,7 @@
 
         }
 
-        function buyAll() {
-            $.ajax({
-                url: "/order-store", // Replace with your actual API endpoint
-                type: "POST",
-                data: {
-                    data: pizza
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }, // Your data payload
-                success: function(response) {
-                    console.log("Success:", response);
-                    // Handle the success response here
-                },
-                error: function(error) {
-                    console.error("Error:", error);
-                    // Handle the error response here
-                }
-            });
 
-        }
 
         function destroyPizza(index) {
             console.log("index", index);
@@ -287,6 +267,58 @@
             });
 
             document.getElementById('counter').textContent = pizza.length;
+
+        }
+
+        function addBuy(clickedElement) {
+
+            var cardBody = clickedElement.closest('.card-body');
+
+            // Find the closest .card-body to the clicked element
+            var price = cardBody.find('.price').text().replace(/\s/g, '').replace(/\$/g, '');
+            var name_pi = cardBody.find('.name_pi').text().replace(/\s/g, '');
+            var topping = cardBody.find('.topping').val();
+            var quantity = cardBody.find('.quantity').val();
+            var img = cardBody.find('.img-id').val();
+
+            var dataObject = {
+                image: img,
+                price: price,
+                name_pi: name_pi,
+                topping: topping,
+                quantity: quantity,
+                totalPrice: (parseFloat(price) * parseInt(quantity))
+            };
+            pizza.push(dataObject);
+
+            this.buyAll();
+        }
+
+
+        function buyAll() {
+            $.ajax({
+                url: "/order-store", // Replace with your actual API endpoint
+                type: "POST",
+                data: {
+                    data: pizza
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }, // Your data payload
+                success: function(response) {
+                    console.log("Success:", response);
+
+                    var pizzaAllDiv = document.getElementById('pizza-all');
+                    pizzaAllDiv.innerHTML = '';
+                    document.getElementById('counter').textContent = '';
+                    alert('ซื้อสำเร็จ');
+                    // Handle the success response here
+                },
+                error: function(error) {
+                    console.error("Error:", error);
+                    // Handle the error response here
+                }
+            });
 
         }
     </script>

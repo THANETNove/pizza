@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use App\Models\Promotion;
+use Auth;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -33,7 +34,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $data = $request['data']; // Assuming $request is your request object
+
+        // Convert the data to JSON format
+        $jsonData = json_encode($data);
+
+        $member = new Order;
+        $member->user_id = Auth::user()->id;
+        $member->pizzas = $jsonData;
+        $member->status = "0";
+        $member->save();
+        return response()->json("succeed");
+
     }
 
     /**

@@ -69,7 +69,7 @@
                                             </div>
                                             <button class="btn btn-primary mt-3" onclick="addToCart($(this))">Add
                                                 to Cart</button>
-                                            <button class="btn btn-info mt-3" onclick="addToCart($(this))">Buy</button>
+                                            <button class="btn btn-info mt-3" onclick="addBuy($(this))">Buy</button>
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
                                     </div>
                                     <button class="btn btn-primary mt-3" onclick="addToCart($(this))">Add
                                         to Cart</button>
-                                    <button class="btn btn-info mt-3" onclick="addToCart($(this))">Buy</button>
+                                    <button class="btn btn-info mt-3" onclick="addBuy($(this))">Buy</button>
                                 </div>
                             </div>
                         </div>
