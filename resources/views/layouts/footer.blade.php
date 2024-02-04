@@ -114,6 +114,7 @@
 
 
         function showImage(element, i) {
+            event.stopPropagation();
             var modal = document.getElementById('myModal');
             var img = document.getElementById('myImg' + i).src;
             console.log("img", img);
@@ -123,6 +124,7 @@
 
         $(document).ready(function() {
             $('.topping-select').change(function() {
+
                 // Get the selected topping price
                 var selectedToppingPrice = parseFloat($(this).find(':selected').data('topping-price')) || 0;
 
@@ -136,6 +138,34 @@
                 $(this).closest('.card-body').find('.total-price').text('$' + totalPrice.toFixed(2));
             });
         });
+
+        /*  $('.cards-container').on('click', '.card-body', function() {
+             var price = $(this).find('.price').text().replace(/\s/g, '').replace(/\$/g, '');
+             var name_pi = $(this).find('.name_pi').text().replace(/\s/g, '');
+             var topping = $(this).find('.topping').text().replace(/\s/g, '');
+             var quantity = $(this).find('.quantity').val();
+
+             // Call addToCart function with the extracted data
+             addToCart(name_pi, price, topping, quantity);
+
+
+         }); */
+
+        function addToCart(clickedElement) {
+            var cardBody = clickedElement.closest('.card-body');
+
+            // Find the closest .card-body to the clicked element
+            var price = cardBody.find('.price').text().replace(/\s/g, '').replace(/\$/g, '');
+            var name_pi = cardBody.find('.name_pi').text().replace(/\s/g, '');
+            var topping = cardBody.find('.topping').text().replace(/\s/g, '');
+            var quantity = cardBody.find('.quantity').val();
+
+            // Log the extracted data to the console
+            console.log('Price:', price);
+            console.log('Name:', name_pi);
+            console.log('Topping:', topping);
+            console.log('Quantity:', quantity);
+        }
     </script>
 
 
