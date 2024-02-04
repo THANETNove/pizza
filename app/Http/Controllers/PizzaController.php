@@ -18,9 +18,15 @@ class PizzaController extends Controller
 
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $data = DB::table('pizzas')->get();
+        $search =  $request['search'];
+        $data = DB::table('pizzas');
+        if ($search) {
+            $data->where('name', 'LIKE', "%$search%");
+        }
+        $data = $data->get();
+
         return view('pizza.index',['data' => $data]);
     }
 

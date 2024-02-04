@@ -5,8 +5,8 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary mb-2">Order</h6>
-                <a href="{{ url('order-create') }}">เพิ่ม Order</a>
+                <h6 class="m-0 font-weight-bold text-primary mb-2">Order All</h6>
+
             </div>
             <div class="card-body">
                 <div class="table-responsive">

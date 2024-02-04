@@ -13,13 +13,18 @@ class PromotionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search =  $request['search'];
         $data = DB::table('promotions')
         ->leftJoin('pizzas', 'promotions.name', '=', 'pizzas.id')
         ->leftJoin('toppings', 'promotions.toppings', '=', 'toppings.id')
-        ->select('promotions.*','pizzas.name as pizzaName','pizzas.image','toppings.name as toppingName')
-        ->get();
+        ->select('promotions.*','pizzas.name as pizzaName','pizzas.image','toppings.name as toppingName');
+        if ($search) {
+            $data->where('pizzas.name', 'LIKE', "%$search%")
+            ->orWhere('toppings.name', 'LIKE', "%$search%");
+        }
+        $data = $data->get();
         return view('promotion.index',['data' => $data]);
     }
 

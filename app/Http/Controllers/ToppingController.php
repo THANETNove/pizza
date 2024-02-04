@@ -11,9 +11,15 @@ class ToppingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = DB::table('toppings')->get();
+        $search =  $request['search'];
+        $data = DB::table('toppings');
+        if ($search) {
+            $data->where('name', 'LIKE', "%$search%");
+        }
+        $data = $data->get();
+
         return view('topping.index',['data' => $data]);
     }
 
