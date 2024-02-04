@@ -19,7 +19,10 @@ use App\Http\Controllers\OrderController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $pizzas = DB::table('pizzas')->get();
+    $topping = DB::table('toppings')->get();
+    $promotion = DB::table('promotions')->get();
+    return view('welcome',['pizzas'=>$pizzas,'promotion' => $promotion,'topping'=>$topping]);
 });
 
 Auth::routes();
