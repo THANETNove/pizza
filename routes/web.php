@@ -31,4 +31,8 @@ Route::put('/update-pizza/{id}', [PizzaController::class, 'update'])->name('upda
 Route::get('/pizza-destroy/{id}', [PizzaController::class, 'destroy'])->name('pizza-destroy');
 
 Route::get('/topping-index', [ToppingController::class, 'index'])->name('topping-index');
-Route::post('/topping-store', [ToppingController::class, 'index'])->name('topping-store');
+Route::get('/topping-create', [ToppingController::class, 'create'])->name('topping-create');
+Route::get('/topping-edit/{id}', [ToppingController::class, 'edit'])->name('topping-edit');
+Route::post('/topping-store', [ToppingController::class, 'store'])->name('topping-store');
+Route::put('/topping-update/{id}', [ToppingController::class, 'update'])->name('topping-update');
+Route::get('/topping-destroy/{id}', [ToppingController::class, 'destroy'])->name('topping-destroy');

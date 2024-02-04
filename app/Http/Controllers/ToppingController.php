@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Toopping;
+use App\Models\Topping;
 use DB;
 
 class ToppingController extends Controller
@@ -13,7 +13,8 @@ class ToppingController extends Controller
      */
     public function index()
     {
-        return view('topping.index');
+        $data = DB::table('toppings')->get();
+        return view('topping.index',['data' => $data]);
     }
 
     /**
@@ -29,7 +30,8 @@ class ToppingController extends Controller
      */
     public function store(Request $request)
     {
-        $member = new Pizza;
+
+        $member = new Topping;
         $member->name = $request['name'];
         $member->price = $request['price'];
         $member->save();
@@ -49,7 +51,9 @@ class ToppingController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data =  Topping::find($id);
+        return view('topping.edit',['data' =>$data]);
+
     }
 
     /**
@@ -57,7 +61,11 @@ class ToppingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $member =  Topping::find($id);
+        $member->name = $request['name'];
+        $member->price = $request['price'];
+        $member->save();
+        return redirect('topping-index')->with('message', "บันทึกสำเร็จ" );
     }
 
     /**
@@ -65,6 +73,8 @@ class ToppingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $member = Topping::find($id);
+        $member->delete();
+        return redirect('topping-index')->with('message', "ลบสำเร็จ" );
     }
 }
