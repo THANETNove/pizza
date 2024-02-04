@@ -44,12 +44,12 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item"
-                                                    href="{{ url('pizza-edit', $da->id) }}"><i
+                                                <a class="dropdown-item" href="{{ url('pizza-edit', $da->id) }}"><i
                                                         class="bx bx-edit-alt me-1"></i> Edit</a>
 
                                                 <a class="dropdown-item alert-destroy"
-                                                    href="{{ url('get-articlesRepair-destroy', $da->id) }}"><i
+                                                    onClick="javascript:return confirm('คุณต้องการลบข้อมูลใช่หรือไม่ ! ');"
+                                                    href="{{ url('pizza-destroy', $da->id) }}"><i
                                                         class="bx bx-trash me-1"></i> ยกเลิก</a>
 
                                             </div>

@@ -123,6 +123,16 @@ class PizzaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $member = Pizza::find($id);
+        if ($member->image) {
+            $image_path = public_path().'/assets/img/pizza/'.$member->image;
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+
+        }
+        $member->delete();
+
+        return redirect('pizza-index')->with('message', "ลบสำเร็จ" );
     }
 }
