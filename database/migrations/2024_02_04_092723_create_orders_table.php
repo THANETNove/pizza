@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('user_id')->nullable();
             $table->JSON('pizzas')->nullable();
             $table->string('status')->nullable();
+            $table->string('total_sum')->nullable();
             $table->timestamps();
         });
     }

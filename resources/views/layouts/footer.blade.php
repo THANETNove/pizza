@@ -142,6 +142,16 @@
 
         var pizza = [];
 
+        function calculateTotalPrice() {
+            var totalPrice = 0;
+
+            for (var i = 0; i < pizza.length; i++) {
+                totalPrice += parseFloat(pizza[i].totalPrice);
+            }
+
+            return totalPrice;
+        }
+
         function addToCart(clickedElement) {
             var cardBody = clickedElement.closest('.card-body');
 
@@ -296,11 +306,14 @@
 
 
         function buyAll() {
+            var totalPizzaPrice = calculateTotalPrice();
+
             $.ajax({
                 url: "/order-store", // Replace with your actual API endpoint
                 type: "POST",
                 data: {
-                    data: pizza
+                    data: pizza,
+                    price: totalPizzaPrice,
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -312,6 +325,7 @@
                     pizzaAllDiv.innerHTML = '';
                     document.getElementById('counter').textContent = '';
                     alert('ซื้อสำเร็จ');
+                    pizza = [];
                     // Handle the success response here
                 },
                 error: function(error) {

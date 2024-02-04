@@ -49,3 +49,6 @@ Route::get('/promotion-destroy/{id}', [PromotionController::class, 'destroy'])->
 Route::get('/order-index', [OrderController::class, 'index'])->name('order-index');
 Route::get('/order-create', [OrderController::class, 'create'])->name('order-create');
 Route::post('/order-store', [OrderController::class, 'store'])->name('order-store');
+Route::get('/order-destroy/{id}', [OrderController::class, 'destroy'])->name('order-destroy');
+Route::get('/order-update/{id}', [OrderController::class, 'update'])->name('order-update');
+Route::get('/order-list', [OrderController::class, 'list'])->name('order-list');

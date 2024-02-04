@@ -14,7 +14,19 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view("order.index");
+        $data = DB::table('orders')
+        ->where('status',0)
+        ->get();
+        return view("order.index",['data' => $data]);
+    }
+
+
+    public function list()
+    {
+        $data = DB::table('orders')
+        ->where('status','>',0)
+        ->get();
+        return view("order.listOresr",['data' => $data]);
     }
 
     /**
@@ -42,6 +54,7 @@ class OrderController extends Controller
         $member = new Order;
         $member->user_id = Auth::user()->id;
         $member->pizzas = $jsonData;
+        $member->total_sum = $request['price'];
         $member->status = "0";
         $member->save();
         return response()->json("succeed");
@@ -67,9 +80,12 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update($id)
     {
-        //
+        $member =  Order::find($id);
+        $member->status = "1";
+        $member->save();
+        return redirect('order-index')->with('message', "บันทึกสำเร็จ" );
     }
 
     /**
@@ -77,6 +93,9 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $member = Order::find($id);
+        $member->status = "2";
+        $member->save();
+        return redirect('order-index')->with('message', "บันทึกสำเร็จ" );
     }
 }

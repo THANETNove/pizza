@@ -12,5 +12,6 @@ class Order extends Model
         'user_id',
         'pizzas',
         'status',
+        'total_sum',
         ];
 }

@@ -57,10 +57,14 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a type="button" class="btn btn-primary"
-                                            href="{{ url('order-update', $da->id) }}">ส่งเร็จ</a>
-                                        <a type="button" class="btn btn-warning"
-                                            href="{{ url('order-destroy', $da->id) }}">ยกเลิก</a>
+                                        @if ($da->status == 1)
+                                            <button type="button" class="btn btn-secondary">ส่งเร็จ</button>
+                                        @endif
+                                        @if ($da->status == 2)
+                                            <button type="button" class="btn btn-secondary">ยกเลิก</button>
+                                        @endif
+
+
                                     </td>
                                 </tr>
                             @endforeach
