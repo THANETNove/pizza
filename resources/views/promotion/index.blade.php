@@ -5,7 +5,7 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary mb-2">Popping</h6>
+                <h6 class="m-0 font-weight-bold text-primary mb-2">Promotion</h6>
                 <a href="{{ url('promotion-create') }}">เพิ่ม Promotion</a>
             </div>
             <div class="card-body">
@@ -15,7 +15,10 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">ชื่อ</th>
+                                <th scope="col">Topping</th>
                                 <th scope="col">ราคา</th>
+                                <th scope="col">เริ่ม Promotion</th>
+                                <th scope="col">หมด Promotion</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -29,12 +32,15 @@
                                     <td>{{ $da->pizzaName }}</td>
                                     <td>{{ $da->toppingName }}</td>
                                     <td>{{ number_format($da->price) }}</td>
+                                    <td>{{ $da->start_date }}</td>
+                                    <td>{{ $da->end_date }}</td>
                                     <td>
                                         <img id="myImg{{ $da->id }}" class="cursor"
                                             src="{{ URL::asset('/assets/img/pizza/' . $da->image) }}"
                                             onclick="showImage(this,{{ $da->id }})" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal" height="90px" width="80px" alt="...">
                                     </td>
+
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -42,12 +48,12 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ url('topping-edit', $da->id) }}"><i
+                                                <a class="dropdown-item" href="{{ url('promotion-edit', $da->id) }}"><i
                                                         class="bx bx-edit-alt me-1"></i> Edit</a>
 
                                                 <a class="dropdown-item alert-destroy"
                                                     onClick="javascript:return confirm('คุณต้องการลบข้อมูลใช่หรือไม่ ! ');"
-                                                    href="{{ url('topping-destroy', $da->id) }}"><i
+                                                    href="{{ url('promotion-destroy', $da->id) }}"><i
                                                         class="bx bx-trash me-1"></i> ยกเลิก</a>
 
                                             </div>

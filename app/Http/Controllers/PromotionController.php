@@ -67,7 +67,10 @@ class PromotionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pizzas = DB::table('pizzas')->get();
+        $toppings = DB::table('toppings')->get();
+        $data =  Promotion::find($id);
+        return view('promotion.edit',['pizzas' => $pizzas, 'toppings' => $toppings,'data' => $data]);
     }
 
     /**
@@ -75,7 +78,20 @@ class PromotionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $validated = $request->validate([
+            'name' => ['required'],
+            'toppings' => ['required'],
+            /* 'image' => ['required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'], */
+        ]);
+        $member =  Promotion::find($id);
+        $member->name = $request['name'];
+        $member->toppings = $request['toppings'];
+        $member->price = $request['price'];
+        $member->start_date = $request['start_date'];
+        $member->end_date = $request['end_date'];
+        $member->save();
+        return redirect('promotion-index')->with('message', "บันทึกสำเร็จ" );
     }
 
     /**
@@ -83,6 +99,9 @@ class PromotionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $member =  Promotion::find($id);
+        $member->delete();
+
+        return redirect('promotion-index')->with('message', "ลบสำเร็จ" );
     }
 }
