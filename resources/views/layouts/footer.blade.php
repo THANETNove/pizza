@@ -6,14 +6,7 @@
             </div>
         </div>
     </div>
-    <script>
-        function showImage(element, i) {
-            var modal = document.getElementById('myModal');
-            var img = document.getElementById('myImg' + i).src;
-            console.log("img", img);
-            document.getElementById('img1').src = img;
-        }
-    </script>
+
 
     <script>
         var dateFormat = "yy-mm-dd";
@@ -118,7 +111,34 @@
                 return [true, ""];
             },
         });
+
+
+        function showImage(element, i) {
+            var modal = document.getElementById('myModal');
+            var img = document.getElementById('myImg' + i).src;
+            console.log("img", img);
+            document.getElementById('img1').src = img;
+        }
+
+
+        $(document).ready(function() {
+            $('.topping-select').change(function() {
+                // Get the selected topping price
+                var selectedToppingPrice = parseFloat($(this).find(':selected').data('topping-price')) || 0;
+
+                // Get the pizza price
+                var pizzaPrice = parseFloat($(this).data('pi-price')) || 0;
+
+                // Calculate and update the total price
+                var totalPrice = pizzaPrice + selectedToppingPrice;
+
+                console.log("totalPrice", totalPrice);
+                $(this).closest('.card-body').find('.total-price').text('$' + totalPrice.toFixed(2));
+            });
+        });
     </script>
+
+
     <script src="{{ URL::asset('/assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 

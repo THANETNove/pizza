@@ -30,6 +30,11 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Promotion</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('/order-index') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Order</span></a>
+    </li>
 
 
 

@@ -12617,3 +12617,7 @@ body.sidebar-toggled footer.sticky-footer {
 .cursor:hover {
     cursor: pointer;
 }
+
+.start-date {
+    font-size: 10px;
+}

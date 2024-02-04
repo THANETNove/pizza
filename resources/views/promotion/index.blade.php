@@ -31,7 +31,7 @@
                                     <th scope="row">{{ $i++ }}</th>
                                     <td>{{ $da->pizzaName }}</td>
                                     <td>{{ $da->toppingName }}</td>
-                                    <td>{{ number_format($da->price) }}</td>
+                                    <td>{{ number_format($da->price, 2) }}</td>
                                     <td>{{ $da->start_date }}</td>
                                     <td>{{ $da->end_date }}</td>
                                     <td>

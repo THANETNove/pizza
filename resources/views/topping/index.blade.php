@@ -27,7 +27,7 @@
                                 <tr>
                                     <th scope="row">{{ $i++ }}</th>
                                     <td>{{ $da->name }}</td>
-                                    <td>{{ number_format($da->price) }}</td>
+                                    <td>{{ number_format($da->price, 2) }}</td>
 
                                     <td>
                                         <div class="dropdown">

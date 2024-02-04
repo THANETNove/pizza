@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\ToppingController;
 use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,6 @@ Route::get('/promotion-edit/{id}', [PromotionController::class, 'edit'])->name('
 Route::post('/promotion-store', [PromotionController::class, 'store'])->name('promotion-store');
 Route::put('/promotion-update/{id}', [PromotionController::class, 'update'])->name('promotion-update');
 Route::get('/promotion-destroy/{id}', [PromotionController::class, 'destroy'])->name('promotion-destroy');
+
+Route::get('/order-index', [OrderController::class, 'index'])->name('order-index');
+Route::get('/order-create', [OrderController::class, 'create'])->name('order-create');

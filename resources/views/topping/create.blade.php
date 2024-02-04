@@ -17,10 +17,10 @@
                             required>
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">ราคา (กรณี + ราคา Topping)</label>
                         <input type="number" class="form-control" id="price" name="price" placeholder="ราคา">
-                    </div>
+                    </div> --}}
 
                     <button type="submit" id="submitBtn" class="btn btn-primary">
                         {{ __('บันทึก') }}
