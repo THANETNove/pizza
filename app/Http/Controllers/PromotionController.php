@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Models\Promotion;
+
+
 
 class PromotionController extends Controller
 {
@@ -11,7 +15,7 @@ class PromotionController extends Controller
      */
     public function index()
     {
-        //
+        return view('promotion.index');
     }
 
     /**
@@ -19,7 +23,9 @@ class PromotionController extends Controller
      */
     public function create()
     {
-        //
+        $pizzas = DB::table('pizzas')->get();
+        $toppings = DB::table('toppings')->get();
+        return view('promotion.create',['pizzas' => $pizzas, 'toppings' => $toppings]);
     }
 
     /**
@@ -27,7 +33,20 @@ class PromotionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'name' => ['required'],
+            'toppings' => ['required'],
+            /* 'image' => ['required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'], */
+        ]);
+        $member = new Promotion;
+        $member->name = $request['name'];
+        $member->toppings = $request['toppings'];
+        $member->price = $request['price'];
+        $member->start_date = $request['start_date'];
+        $member->end_date = $request['end_date'];
+        $member->save();
+        return redirect('promotion-index')->with('message', "บันทึกสำเร็จ" );
     }
 
     /**

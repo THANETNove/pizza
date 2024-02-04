@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\ToppingController;
+use App\Http\Controllers\PromotionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,7 @@ Route::get('/topping-edit/{id}', [ToppingController::class, 'edit'])->name('topp
 Route::post('/topping-store', [ToppingController::class, 'store'])->name('topping-store');
 Route::put('/topping-update/{id}', [ToppingController::class, 'update'])->name('topping-update');
 Route::get('/topping-destroy/{id}', [ToppingController::class, 'destroy'])->name('topping-destroy');
+
+Route::get('/promotion-index', [PromotionController::class, 'index'])->name('promotion-index');
+Route::get('/promotion-create', [PromotionController::class, 'create'])->name('promotion-create');
+Route::post('/promotion-store', [PromotionController::class, 'store'])->name('promotion-store');
