@@ -25,3 +25,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/pizza-index', [PizzaController::class, 'index'])->name('pizza-index');
 Route::get('/pizza-create', [PizzaController::class, 'create'])->name('pizza-create');
 Route::post('/store-pizza', [PizzaController::class, 'store'])->name('store-pizza');
+Route::get('/pizza-edit/{id}', [PizzaController::class, 'edit'])->name('pizza-edit');
+Route::put('/update-pizza/{id}', [PizzaController::class, 'update'])->name('update-pizza');

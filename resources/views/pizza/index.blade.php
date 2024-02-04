@@ -18,6 +18,7 @@
                                 <th scope="col">ราคา</th>
                                 <th scope="col">รายละเอียด</th>
                                 <th scope="col">รูปภาพ</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,6 +36,24 @@
                                             src="{{ URL::asset('/assets/img/pizza/' . $da->image) }}"
                                             onclick="showImage(this,{{ $da->id }})" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal" height="90px" width="80px" alt="...">
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item"
+                                                    href="{{ url('pizza-edit', $da->id) }}"><i
+                                                        class="bx bx-edit-alt me-1"></i> Edit</a>
+
+                                                <a class="dropdown-item alert-destroy"
+                                                    href="{{ url('get-articlesRepair-destroy', $da->id) }}"><i
+                                                        class="bx bx-trash me-1"></i> ยกเลิก</a>
+
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

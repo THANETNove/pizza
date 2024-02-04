@@ -75,7 +75,8 @@ class PizzaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data =  Pizza::find($id);
+        return view('pizza.edit',['data' => $data]);
     }
 
     /**
@@ -83,7 +84,38 @@ class PizzaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'image' => ['required', 'image', 'mimes:jpg,png,jpeg,webp'],
+            /* 'image' => ['required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'], */
+        ]);
+
+
+
+        $member = Pizza::find($id);
+
+
+        if ($request->hasFile('image')) {
+
+            if ($member->image) {
+                $image_path = public_path().'/assets/img/pizza/'.$member->image;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+
+            }
+            $image = $request->file('image');
+            $dateNow = now()->format('YmdHis');
+            $newFileName = $dateNow . '.' . $image->getClientOriginalExtension();
+            $data = $image->move(public_path() . '/assets/img/pizza', $newFileName);
+            $dateImg = $newFileName;
+        }
+
+        $member->name = $request['name'];
+        $member->price = $request['price'];
+        $member->image = $dateImg;
+        $member->description = $request['description'];
+        $member->save();
+        return redirect('pizza-index')->with('message', "บันทึกสำเร็จ" );
     }
 
     /**
