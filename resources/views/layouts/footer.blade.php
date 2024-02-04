@@ -139,17 +139,8 @@
             });
         });
 
-        /*  $('.cards-container').on('click', '.card-body', function() {
-             var price = $(this).find('.price').text().replace(/\s/g, '').replace(/\$/g, '');
-             var name_pi = $(this).find('.name_pi').text().replace(/\s/g, '');
-             var topping = $(this).find('.topping').text().replace(/\s/g, '');
-             var quantity = $(this).find('.quantity').val();
 
-             // Call addToCart function with the extracted data
-             addToCart(name_pi, price, topping, quantity);
-
-
-         }); */
+        var pizza = [];
 
         function addToCart(clickedElement) {
             var cardBody = clickedElement.closest('.card-body');
@@ -157,14 +148,146 @@
             // Find the closest .card-body to the clicked element
             var price = cardBody.find('.price').text().replace(/\s/g, '').replace(/\$/g, '');
             var name_pi = cardBody.find('.name_pi').text().replace(/\s/g, '');
-            var topping = cardBody.find('.topping').text().replace(/\s/g, '');
+            var topping = cardBody.find('.topping').val();
             var quantity = cardBody.find('.quantity').val();
+            var img = cardBody.find('.img-id').val();
 
-            // Log the extracted data to the console
-            console.log('Price:', price);
-            console.log('Name:', name_pi);
-            console.log('Topping:', topping);
-            console.log('Quantity:', quantity);
+
+            if (!topping) {
+                alert('กรุณาเลือก Topping!');
+            } else {
+                var existingPizza = pizza.find(item => item.name_pi === name_pi);
+                var toppingPizza = pizza.find(item => item.topping === topping);
+
+                if (existingPizza && toppingPizza) {
+                    // If the pizza already exists, update its quantity
+                    existingPizza.quantity = parseInt(existingPizza.quantity) + parseInt(quantity);
+                    existingPizza.totalPrice = (parseFloat(existingPizza.price) * existingPizza.quantity);
+                } else {
+                    // If the pizza doesn't exist, create a new dataObject
+                    var dataObject = {
+                        image: img,
+                        price: price,
+                        name_pi: name_pi,
+                        topping: topping,
+                        quantity: quantity,
+                        totalPrice: (parseFloat(price) * parseInt(quantity))
+                    };
+
+                    // Push the dataObject into the pizza array
+                    pizza.push(dataObject);
+                }
+
+                var pizzaAllDiv = document.getElementById('pizza-all');
+                pizzaAllDiv.innerHTML = '';
+                var baseUrl = "{{ asset('/assets/img/pizza/') }}";
+                pizza.forEach(function(item, index) {
+                    var imageUrl = baseUrl + '/' + item.image;
+                    var formattedPrice = parseFloat(item.price).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    var formattedTotalPrice = parseFloat(item.totalPrice).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+
+
+
+                    // Create elements dynamically using template literals
+                    var div_pizza = `
+                    <div class="dropdown-item d-flex align-items-center cursor" onclick="destroyPizza(${index})">
+                        <div class="mr-3">
+                            <img src="${imageUrl}" height="40px" width="40px" alt="...">
+                        </div>
+                        <div>
+                            <div class="small text-gray-500">Order : ${++index}</div>
+                            ${item.name_pi}  ${item.topping} จำนวน :${item.quantity}  ราคา : ${formattedPrice} สรุป :  ${formattedTotalPrice}
+                            <br>
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </div>
+                    </div>`;
+
+                    // Append the dynamically generated HTML to the 'pizza-all' div
+                    pizzaAllDiv.innerHTML += div_pizza;
+                });
+
+
+
+
+                document.getElementById('counter').textContent = pizza.length;
+                var pizzaAllDiv = document.getElementById('buy-all');
+                pizzaAllDiv.innerHTML =
+                    `<a class="dropdown-item text-center small text-gray-500 cursor" onclick="buyAll()">Buy All</a>`;
+
+            }
+
+        }
+
+        function buyAll() {
+            $.ajax({
+                url: "/order-store", // Replace with your actual API endpoint
+                type: "POST",
+                data: {
+                    data: pizza
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }, // Your data payload
+                success: function(response) {
+                    console.log("Success:", response);
+                    // Handle the success response here
+                },
+                error: function(error) {
+                    console.error("Error:", error);
+                    // Handle the error response here
+                }
+            });
+
+        }
+
+        function destroyPizza(index) {
+            console.log("index", index);
+            var indexToRemove = index; // Replace with the actual index you want to remove
+
+            pizza.splice(indexToRemove, 1);
+
+            var pizzaAllDiv = document.getElementById('pizza-all');
+            pizzaAllDiv.innerHTML = '';
+            var baseUrl = "{{ asset('/assets/img/pizza/') }}";
+            pizza.forEach(function(item, index) {
+                var imageUrl = baseUrl + '/' + item.image;
+                var formattedPrice = parseFloat(item.price).toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+                var formattedTotalPrice = parseFloat(item.totalPrice).toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+
+
+
+                // Create elements dynamically using template literals
+                var div_pizza = `
+                    <div class="dropdown-item d-flex align-items-center cursor" onclick="destroyPizza(${index})">
+                        <div class="mr-3">
+                            <img src="${imageUrl}" height="40px" width="40px" alt="...">
+                        </div>
+                        <div>
+                            <div class="small text-gray-500">Order : ${++index}</div>
+                            ${item.name_pi}  ${item.topping} จำนวน :${item.quantity}  ราคา : ${formattedPrice} สรุป :  ${formattedTotalPrice}
+                            <br>
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </div>
+                    </div>`;
+
+                // Append the dynamically generated HTML to the 'pizza-all' div
+                pizzaAllDiv.innerHTML += div_pizza;
+            });
+
+            document.getElementById('counter').textContent = pizza.length;
+
         }
     </script>
 

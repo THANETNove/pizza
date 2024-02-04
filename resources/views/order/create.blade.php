@@ -40,7 +40,7 @@
 
                                                         @foreach ($topping as $to)
                                                             @if ($pro->toppings == $to->id)
-                                                                <option value="{{ $to->id }}" selected>
+                                                                <option value="{{ $to->name }}" selected>
                                                                     {{ $to->name }}
                                                                 </option>
                                                             @endif
@@ -57,6 +57,8 @@
                                                         {{ \Carbon\Carbon::parse($pro->end_date)->format('d-m-yy') }}
                                                     </span>
                                                 </div>
+                                                <input type="text" style="display: none" class="img-id"
+                                                    value="{{ $pi->image }}">
                                                 <div class="col-auto">
                                                     <img id="myImg{{ $pi->id }}" class="cursor"
                                                         src="{{ URL::asset('/assets/img/pizza/' . $pi->image) }}"
@@ -67,7 +69,7 @@
                                             </div>
                                             <button class="btn btn-primary mt-3" onclick="addToCart($(this))">Add
                                                 to Cart</button>
-
+                                            <button class="btn btn-info mt-3" onclick="addToCart($(this))">Buy</button>
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +92,7 @@
                                                 aria-label="Disabled select example" data-pi-price="{{ $pi->price }}">
                                                 <option selected disabled>Topping</option>
                                                 @foreach ($topping as $to)
-                                                    <option value="{{ $to->id }}"
+                                                    <option value="{{ $to->name }}"
                                                         data-topping-price="{{ $to->price }}">{{ $to->name }}
                                                     </option>
                                                 @endforeach
@@ -99,6 +101,8 @@
                                                 placeholder="1" aria-label=".form-control-sm example" value="1"
                                                 min="1">
                                         </div>
+                                        <input type="text" style="display: none" class="img-id"
+                                            value="{{ $pi->image }}">
                                         <div class="col-auto">
                                             <img id="myImg{{ $pi->id }}" class="cursor"
                                                 src="{{ URL::asset('/assets/img/pizza/' . $pi->image) }}"
@@ -108,6 +112,7 @@
                                     </div>
                                     <button class="btn btn-primary mt-3" onclick="addToCart($(this))">Add
                                         to Cart</button>
+                                    <button class="btn btn-info mt-3" onclick="addToCart($(this))">Buy</button>
                                 </div>
                             </div>
                         </div>
