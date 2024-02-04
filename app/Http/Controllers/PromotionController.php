@@ -15,7 +15,12 @@ class PromotionController extends Controller
      */
     public function index()
     {
-        return view('promotion.index');
+        $data = DB::table('promotions')
+        ->leftJoin('pizzas', 'promotions.name', '=', 'pizzas.id')
+        ->leftJoin('toppings', 'promotions.toppings', '=', 'toppings.id')
+        ->select('promotions.*','pizzas.name as pizzaName','pizzas.image','toppings.name as toppingName')
+        ->get();
+        return view('promotion.index',['data' => $data]);
     }
 
     /**

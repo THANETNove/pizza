@@ -23,12 +23,18 @@
                             @php
                                 $i = 1;
                             @endphp
-                            {{--     @foreach ($data as $da)
+                            @foreach ($data as $da)
                                 <tr>
                                     <th scope="row">{{ $i++ }}</th>
-                                    <td>{{ $da->name }}</td>
+                                    <td>{{ $da->pizzaName }}</td>
+                                    <td>{{ $da->toppingName }}</td>
                                     <td>{{ number_format($da->price) }}</td>
-
+                                    <td>
+                                        <img id="myImg{{ $da->id }}" class="cursor"
+                                            src="{{ URL::asset('/assets/img/pizza/' . $da->image) }}"
+                                            onclick="showImage(this,{{ $da->id }})" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal" height="90px" width="80px" alt="...">
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -48,7 +54,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
 
 
                         </tbody>

@@ -66,20 +66,5 @@
         </div>
 
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <img id="img1" width="100%">
-            </div>
-        </div>
-    </div>
-    <script>
-        function showImage(element, i) {
-            var modal = document.getElementById('myModal');
-            var img = document.getElementById('myImg' + i).src;
-            console.log("img", img);
-            document.getElementById('img1').src = img;
-        }
-    </script>
+
 @endsection
