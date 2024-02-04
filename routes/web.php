@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PizzaController;
+use App\Http\Controllers\ToppingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::post('/store-pizza', [PizzaController::class, 'store'])->name('store-pizz
 Route::get('/pizza-edit/{id}', [PizzaController::class, 'edit'])->name('pizza-edit');
 Route::put('/update-pizza/{id}', [PizzaController::class, 'update'])->name('update-pizza');
 Route::get('/pizza-destroy/{id}', [PizzaController::class, 'destroy'])->name('pizza-destroy');
+
+Route::get('/topping-index', [ToppingController::class, 'index'])->name('topping-index');
+Route::post('/topping-store', [ToppingController::class, 'index'])->name('topping-store');

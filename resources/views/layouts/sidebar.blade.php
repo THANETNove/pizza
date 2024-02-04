@@ -20,6 +20,11 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Pizza</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('/topping-index') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Topping</span></a>
+    </li>
 
 
 
