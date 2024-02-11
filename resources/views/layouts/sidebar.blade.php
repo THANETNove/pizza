@@ -15,31 +15,40 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ url('/pizza-index') }}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Pizza</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ url('/topping-index') }}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Topping</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ url('/promotion-index') }}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Promotion</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ url('/order-index') }}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Order</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ url('/order-list') }}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Order All</span></a>
-    </li>
+
+    @if (Auth::user()->status > 0)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/pizza-index') }}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Pizza</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/topping-index') }}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Topping</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/promotion-index') }}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Promotion</span></a>
+        </li>
+    @endif
+
+
+    @if (Auth::user()->status >= 0)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/order-index') }}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Order</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/order-list') }}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Order All</span></a>
+        </li>
+    @endif
+
 
 
 

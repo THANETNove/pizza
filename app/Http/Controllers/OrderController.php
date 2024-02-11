@@ -15,8 +15,12 @@ class OrderController extends Controller
     public function index()
     {
         $data = DB::table('orders')
-        ->where('status',0)
-        ->get();
+        ->where('status',0);
+        if (Auth::user()->status == 0) {
+            $data =   $data->where('user_id',Auth::user()->id);
+        }
+
+        $data =  $data->get();
         return view("order.index",['data' => $data]);
     }
 
@@ -24,8 +28,11 @@ class OrderController extends Controller
     public function list()
     {
         $data = DB::table('orders')
-        ->where('status','>',0)
-        ->get();
+        ->where('status','>',0);
+        if (Auth::user()->status == 0) {
+            $data =   $data->where('user_id',Auth::user()->id);
+        }
+        $data =   $data->get();
         return view("order.listOresr",['data' => $data]);
     }
 
