@@ -28,6 +28,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/dash-board', [HomeController::class, 'dashboard'])->name('dash-board');
 Route::get('/pizza-index', [PizzaController::class, 'index'])->name('pizza-index');
 Route::post('/pizza-index', [PizzaController::class, 'index'])->name('pizza-index');
 Route::get('/pizza-create', [PizzaController::class, 'create'])->name('pizza-create');

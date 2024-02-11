@@ -18,6 +18,11 @@
 
     @if (Auth::user()->status > 0)
         <li class="nav-item">
+            <a class="nav-link" href="{{ url('/dash-board') }}">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>dashboard </span></a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ url('/pizza-index') }}">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Pizza</span></a>
